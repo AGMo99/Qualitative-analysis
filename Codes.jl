@@ -59,9 +59,7 @@ using scikitlearn
 model = LogisticRegression(fit_intercept=true)
 fit!(model,ind, VeryBad, SomeBad, Neither, SomeGood, VeryGood)
 
-ps = predicte_proba
-
-res = df.ind - predict(model)
+ps = predicte_proba(model, df[:ind])
 
 #Check The Model
 
