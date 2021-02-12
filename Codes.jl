@@ -19,9 +19,9 @@ select!(df, Not(:obs))
 
 #Change Column's Name
 
-df = select(df,"demographics"=> "demographics", "Verybadinvestment" => "Very Bad",
-     "Somewhatbadinvestment" => "Some Bad","Neithergoodnorbadasaninvestment"  => "Neither",
-	 "Somewhatgoodinvestment" => "Some Good", "Verygoodinvestment" => "Very Good")
+df = select(df,"demographics"=> "demographics", "Verybadinvestment" => "VeryBad",
+     "Somewhatbadinvestment" => "SomeBad","Neithergoodnorbadasaninvestment"  => "Neither",
+	 "Somewhatgoodinvestment" => "SomeGood", "Verygoodinvestment" => "VeryGood")
 
 DataFrames.describe(df)
 
@@ -39,20 +39,20 @@ select!(df, Not(:demographics))
 
 #Change Form % to count number
 
-df["Very Bad"][df["Very Bad"] .==[2, 1]] = [15, 2]
-df["Some Bad"][df["Some Bad"] .==[7, 6]] = [52, 15]
+df["VeryBad"][df["VeryBad"] .==[2, 1]] = [15, 2]
+df["SomeBad"][df["SomeBad"] .==[7, 6]] = [52, 15]
 df["Neither"][df["Neither"] .==[19, 25]] = [142, 62]
-df["Some Good"][df["Some Good"] .==[48, 41]] = [58, 102]
-df["Very Good"][df["Very Good"] .==[24, 27]] = [179, 67]
+df["SomeGood"][df["SomeGood"] .==[48, 41]] = [58, 102]
+df["VeryGood"][df["VeryGood"] .==[24, 27]] = [179, 67]
 
 #Plot The Data
 
-plot(df, color="ind", x="Very Good", y="Very Bad", shape="Neither", Geom.point)
-plot(df, color="ind", x="Some Good", y="Some Bad", Geom.point)
+plot(df, color="ind", x="VeryGood", y="VeryBad", shape="Neither", Geom.point)
+plot(df, color="ind", x="SomeGood", y="SomeBad", Geom.point)
 
 #The Model
 
-model = GLM.glm(@formula(ind ~ Very Bad + Some Bad + Neither + Some Good + Very Good), df, Nromal(), ProbitLink())
+model = GLM.glm(@formula(ind ~ VeryBad + Some Bad + Neither + Some Good + Very Good), df, Nromal(), ProbitLink())
 
 res = df.ind - predict(model)
 
