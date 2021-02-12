@@ -52,7 +52,14 @@ plot(df, color="ind", x="SomeGood", y="SomeBad", Geom.point)
 
 #The Model
 
-model = GLM.glm(@formula(ind ~ VeryBad + Some Bad + Neither + Some Good + Very Good), df, Nromal(), ProbitLink())
+using scikitlearn
+
+@sk_import linear_model: LogisticRegression
+
+model = LogisticRegression(fit_intercept=true)
+fit!(model,ind, VeryBad, SomeBad, Neither, SomeGood, VeryGood)
+
+ps = predicte_proba
 
 res = df.ind - predict(model)
 
