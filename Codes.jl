@@ -5,7 +5,7 @@ using CSV, DataFrames, CategoricalArrays, HypothesisTests, Statistics, StatsBase
 
 #Load Data
 
-df = DataFrame(CSV.File("C:/Users/AG/desktop/data/Micro data.csv", header = true))
+df = DataFrame(CSV.File(".../Micro data.csv", header = true))
 
 #Clean
 df = df[df[:, 1].== 2020,:]
